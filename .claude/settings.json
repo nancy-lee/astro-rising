@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.venv/bin/python3 compute/*)",
+      "Bash(.venv/bin/python3 -c *)",
+      "Bash(python3 compute/*)",
+      "Bash(python3 -c *)",
+      "Read(*)",
+      "Write(chart_data/*)",
+      "Write(compute/*)"
+    ]
+  }
+}

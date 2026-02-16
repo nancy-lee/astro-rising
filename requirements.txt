@@ -1,0 +1,2 @@
+pyswisseph>=2.10
+timezonefinder>=6.0
