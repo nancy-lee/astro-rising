@@ -24,11 +24,9 @@ When there's no user chart:
 
    Ask for these together so the user can answer in one message. If anything is missing, follow up naturally.
 
-   **You look up the coordinates** for their birth city. The computation script handles timezone detection automatically from the coordinates and date — including historical DST. Don't ask the user for coordinates, timezone, or UTC offset.
+   **You look up the coordinates** for their birth city. Don't ask the user for coordinates, timezone, or UTC offset — the computation script detects timezone automatically.
 
-3. **Compute the chart** by invoking the onboard agent as a background task using the Task tool (subagent_type: "general-purpose", model: "sonnet"). Pass it the birth data, the resolved coordinates/timezone, and the user's familiarity level. Tell it to read `.claude/agents/onboard.md` for its instructions.
-
-   The agent computes the chart, saves it to `chart_data/`, and returns an introduction to the user's chart calibrated to their familiarity level. The user doesn't see the computation — just the result.
+3. **Compute the chart** by invoking the onboard agent as a background task using the Task tool (subagent_type: "general-purpose", model: "sonnet"). Pass it the birth data, the resolved coordinates, and the user's familiarity level. Tell it to read `.claude/agents/onboard.md` for its instructions.
 
 4. **Present the introduction** and offer a `/reading`. Also let the user know a visual chart was saved to `chart_data/<name>_chart.html` — they can open it in a browser to see the Western wheel and BaZi pillars.
 
@@ -39,8 +37,6 @@ When the user asks for a reading (or types `/reading`):
 1. Confirm the date and reading type (weekly, monthly, transit, question). Default to weekly from today if not specified.
 
 2. **Invoke the reading agent** as a background task using the Task tool (subagent_type: "general-purpose", model: "sonnet"). Pass it the user name, date, and reading type. Tell it to read `.claude/agents/reading.md` for its instructions.
-
-   The agent generates the transit context, interprets using the methodology embedded in reading.md, and returns the complete reading.
 
 3. **Present the reading** to the user.
 
@@ -69,14 +65,3 @@ chart_data/           User natal chart JSON files (private, gitignored except sa
 .claude/settings.json Permissions for computation commands
 ```
 
-## Key Technical Notes
-
-- **Dependencies**: `pyswisseph` (ephemeris) + `timezonefinder` (timezone detection). That's it.
-- **Setup**: `./setup.sh` creates a venv at `.venv/`, installs from `requirements.txt`, downloads Swiss Ephemeris data files to `ephe/`
-- **Western ephemeris**: Swiss Ephemeris with data files (`ephe/` directory) for full precision including Chiron
-- **BaZi month**: determined from Sun's ecliptic longitude (solar term boundaries)
-- **BaZi day pillar**: computed from Julian Day Number via `swe.julday()` with sexagenary offset (no reference date needed)
-- **Solar terms**: computed dynamically from Sun's ecliptic longitude via `swe.solcross_ut()` — works for any birth year
-- **Luck pillar start age**: computed from distance to nearest Jie solar term, divided by 3
-- **Times**: UTC for Western computation, LMT-corrected for BaZi hour pillar
-- **House system**: Placidus
