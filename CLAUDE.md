@@ -30,7 +30,7 @@ When there's no user chart:
 
    The agent computes the chart, saves it to `chart_data/`, and returns an introduction to the user's chart calibrated to their familiarity level. The user doesn't see the computation — just the result.
 
-4. **Present the introduction** and offer a `/reading`.
+4. **Present the introduction** and offer a `/reading`. Also let the user know a visual chart was saved to `chart_data/<name>_chart.html` — they can open it in a browser to see the Western wheel and BaZi pillars.
 
 ## Readings
 

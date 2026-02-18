@@ -58,20 +58,20 @@ def lmt_correction(longitude: float, standard_meridian: float = 120.0) -> float:
     """
     Calculate Local Mean Time correction in minutes.
     
-    China uses a single timezone based on 120°E. For locations 
-    significantly west of this (like Nanning at 108.37°E), the clock 
+    China uses a single timezone based on 120°E. For locations
+    significantly west of this (e.g., Chengdu at 104.07°E), the clock
     time differs from solar time.
-    
+
     Args:
         longitude: birth location longitude in degrees (east positive)
         standard_meridian: timezone standard meridian (120.0 for China/CST)
-    
+
     Returns:
         Correction in minutes (negative = subtract from clock time)
-    
+
     Example:
-        Nanning (108.37°E): correction = (108.37 - 120.0) * 4 = -46.52 min
-        So 2:05 PM clock time → ~1:18 PM LMT
+        Chengdu (104.07°E): correction = (104.07 - 120.0) * 4 = -63.7 min
+        So 3:00 PM clock time → ~1:56 PM LMT
     """
     return (longitude - standard_meridian) * 4.0
 
