@@ -28,11 +28,11 @@ When there's no user chart:
 
 3. **Compute the chart** by invoking the onboard agent as a background task using the Task tool (subagent_type: "general-purpose", model: "sonnet"). Pass it the birth data, the resolved coordinates, and the user's familiarity level. Tell it to read `.claude/agents/onboard.md` for its instructions.
 
-4. **Present the introduction** and offer a `/reading`. Also let the user know a visual chart was saved to `chart_data/<name>_chart.html` — they can open it in a browser to see the Western wheel and BaZi pillars.
+4. **Present the introduction** and invite them to ask for a reading. Also let the user know a visual chart was saved to `chart_data/<name>_chart.html` — they can open it in a browser to see the Western wheel and BaZi pillars.
 
 ## Readings
 
-When the user asks for a reading (or types `/reading`):
+When the user asks for a reading:
 
 1. Confirm the date and reading type (weekly, monthly, transit, question). Default to weekly from today if not specified.
 
@@ -47,10 +47,6 @@ Agent instructions live in `.claude/agents/`. They are invoked via the Task tool
 - **onboard** (`.claude/agents/onboard.md`) — Computes natal chart, saves JSON, returns chart introduction
 - **reading** (`.claude/agents/reading.md`) — Generates transit context, produces integrated reading
 
-## Skills
-
-- `/reading` — Triggers the reading flow above.
-
 ## Computation Rule
 
 **Never guess planetary positions, dates, or pillar interactions.** All computation happens through Python modules in `compute/`, invoked by the agents. Don't run Python commands in the main conversation.
@@ -61,7 +57,6 @@ Agent instructions live in `.claude/agents/`. They are invoked via the Task tool
 compute/              Python computation engine (called by agents, not directly)
 chart_data/           User natal chart JSON files (private, gitignored except sample.json)
 .claude/agents/       Onboard and reading agent instructions
-.claude/skills/       Reading skill (user-invocable via /reading)
 .claude/settings.json Permissions for computation commands
 ```
 
