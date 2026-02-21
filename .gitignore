@@ -1,0 +1,24 @@
+# User chart data (private)
+chart_data/*.json
+chart_data/*.html
+chart_data/*_context.json
+!chart_data/sample.json
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Swiss Ephemeris data files
+ephe/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Virtual environments
+.venv/
+venv/
+.claude/sessions/

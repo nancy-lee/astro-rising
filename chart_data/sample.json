@@ -1,0 +1,374 @@
+{
+  "user": {
+    "name": "sample",
+    "birth_date": "1990-03-15",
+    "birth_time_clock": "10:30",
+    "birth_time_lmt": "10:20",
+    "timezone": "America/Los_Angeles (UTC-8)",
+    "western_utc_offset": -8.0,
+    "bazi_utc_offset": -8.0,
+    "dst_detected": false,
+    "timezone_source": "auto",
+    "location": {
+      "city": "San Francisco",
+      "country": "USA",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    "lmt_correction_minutes": -10,
+    "gender": "male"
+  },
+  "western": {
+    "house_system": "Placidus",
+    "zodiac": "tropical",
+    "lmt_corrected": false,
+    "ascendant": {
+      "sign": "Gemini",
+      "degree": 18.3
+    },
+    "midheaven": {
+      "sign": "Aquarius",
+      "degree": 25.9
+    },
+    "planets": {
+      "sun": {
+        "sign": "Pisces",
+        "degree": 24.9,
+        "house": 10
+      },
+      "moon": {
+        "sign": "Scorpio",
+        "degree": 13.0,
+        "house": 6
+      },
+      "mercury": {
+        "sign": "Pisces",
+        "degree": 21.7,
+        "house": 10
+      },
+      "venus": {
+        "sign": "Aquarius",
+        "degree": 9.4,
+        "house": 9
+      },
+      "mars": {
+        "sign": "Aquarius",
+        "degree": 3.0,
+        "house": 9
+      },
+      "jupiter": {
+        "sign": "Cancer",
+        "degree": 1.4,
+        "house": 1
+      },
+      "saturn": {
+        "sign": "Capricorn",
+        "degree": 23.4,
+        "house": 8
+      },
+      "uranus": {
+        "sign": "Capricorn",
+        "degree": 9.2,
+        "house": 7
+      },
+      "neptune": {
+        "sign": "Capricorn",
+        "degree": 14.3,
+        "house": 8
+      },
+      "pluto": {
+        "sign": "Scorpio",
+        "degree": 17.6,
+        "house": 6
+      },
+      "north_node": {
+        "sign": "Aquarius",
+        "degree": 15.7,
+        "house": 9
+      },
+      "chiron": {
+        "sign": "Cancer",
+        "degree": 10.6,
+        "house": 2
+      }
+    },
+    "houses": {
+      "1": {
+        "sign": "Gemini",
+        "degree": 18.3
+      },
+      "2": {
+        "sign": "Cancer",
+        "degree": 10.1
+      },
+      "3": {
+        "sign": "Leo",
+        "degree": 1.4
+      },
+      "4": {
+        "sign": "Leo",
+        "degree": 25.9
+      },
+      "5": {
+        "sign": "Virgo",
+        "degree": 27.8
+      },
+      "6": {
+        "sign": "Scorpio",
+        "degree": 8.1
+      },
+      "7": {
+        "sign": "Sagittarius",
+        "degree": 18.3
+      },
+      "8": {
+        "sign": "Capricorn",
+        "degree": 10.1
+      },
+      "9": {
+        "sign": "Aquarius",
+        "degree": 1.4
+      },
+      "10": {
+        "sign": "Aquarius",
+        "degree": 25.9
+      },
+      "11": {
+        "sign": "Pisces",
+        "degree": 27.8
+      },
+      "12": {
+        "sign": "Taurus",
+        "degree": 8.1
+      }
+    },
+    "natal_aspects": [
+      {
+        "planet1": "moon",
+        "planet2": "neptune",
+        "aspect": "sextile",
+        "orb": 1.33
+      },
+      {
+        "planet1": "uranus",
+        "planet2": "chiron",
+        "aspect": "opposition",
+        "orb": 1.34
+      },
+      {
+        "planet1": "sun",
+        "planet2": "saturn",
+        "aspect": "sextile",
+        "orb": 1.55
+      },
+      {
+        "planet1": "mercury",
+        "planet2": "saturn",
+        "aspect": "sextile",
+        "orb": 1.62
+      },
+      {
+        "planet1": "pluto",
+        "planet2": "north_node",
+        "aspect": "square",
+        "orb": 1.88
+      },
+      {
+        "planet1": "moon",
+        "planet2": "chiron",
+        "aspect": "trine",
+        "orb": 2.4
+      },
+      {
+        "planet1": "moon",
+        "planet2": "north_node",
+        "aspect": "square",
+        "orb": 2.76
+      },
+      {
+        "planet1": "sun",
+        "planet2": "mercury",
+        "aspect": "conjunction",
+        "orb": 3.17
+      },
+      {
+        "planet1": "neptune",
+        "planet2": "pluto",
+        "aspect": "sextile",
+        "orb": 3.32
+      },
+      {
+        "planet1": "moon",
+        "planet2": "venus",
+        "aspect": "square",
+        "orb": 3.6
+      },
+      {
+        "planet1": "neptune",
+        "planet2": "chiron",
+        "aspect": "opposition",
+        "orb": 3.73
+      },
+      {
+        "planet1": "moon",
+        "planet2": "uranus",
+        "aspect": "sextile",
+        "orb": 3.74
+      },
+      {
+        "planet1": "mercury",
+        "planet2": "pluto",
+        "aspect": "trine",
+        "orb": 4.12
+      },
+      {
+        "planet1": "moon",
+        "planet2": "pluto",
+        "aspect": "conjunction",
+        "orb": 4.64
+      },
+      {
+        "planet1": "uranus",
+        "planet2": "neptune",
+        "aspect": "conjunction",
+        "orb": 5.07
+      },
+      {
+        "planet1": "saturn",
+        "planet2": "pluto",
+        "aspect": "sextile",
+        "orb": 5.74
+      },
+      {
+        "planet1": "venus",
+        "planet2": "mars",
+        "aspect": "conjunction",
+        "orb": 6.33
+      },
+      {
+        "planet1": "venus",
+        "planet2": "north_node",
+        "aspect": "conjunction",
+        "orb": 6.36
+      },
+      {
+        "planet1": "sun",
+        "planet2": "jupiter",
+        "aspect": "square",
+        "orb": 6.49
+      },
+      {
+        "planet1": "pluto",
+        "planet2": "chiron",
+        "aspect": "trine",
+        "orb": 7.05
+      }
+    ],
+    "key_themes": []
+  },
+  "bazi": {
+    "pillars": {
+      "year": {
+        "stem": "Geng",
+        "branch": "Wu",
+        "description": "Geng Wu (yang metal Horse)"
+      },
+      "month": {
+        "stem": "Ji",
+        "branch": "Mao",
+        "description": "Ji Mao (yin earth Rabbit)"
+      },
+      "day": {
+        "stem": "Ji",
+        "branch": "You",
+        "description": "Ji You (yin earth Rooster)"
+      },
+      "hour": {
+        "stem": "Ji",
+        "branch": "Si",
+        "description": "Ji Si (yin earth Snake)"
+      }
+    },
+    "day_master": {
+      "stem": "Ji",
+      "chinese": "己",
+      "element": "earth",
+      "polarity": "yin",
+      "description": "Ji (yin earth)"
+    },
+    "zodiac_animal": "Geng Horse",
+    "notable_features": [],
+    "luck_pillars": [
+      {
+        "number": 1,
+        "stem": "Geng",
+        "branch": "Chen",
+        "animal": "Dragon",
+        "ages": "7-16",
+        "element_theme": "Metal/Earth"
+      },
+      {
+        "number": 2,
+        "stem": "Xin",
+        "branch": "Si",
+        "animal": "Snake",
+        "ages": "17-26",
+        "element_theme": "Metal/Fire"
+      },
+      {
+        "number": 3,
+        "stem": "Ren",
+        "branch": "Wu",
+        "animal": "Horse",
+        "ages": "27-36",
+        "element_theme": "Water/Fire"
+      },
+      {
+        "number": 4,
+        "stem": "Gui",
+        "branch": "Wei",
+        "animal": "Goat",
+        "ages": "37-46",
+        "element_theme": "Water/Earth"
+      },
+      {
+        "number": 5,
+        "stem": "Jia",
+        "branch": "Shen",
+        "animal": "Monkey",
+        "ages": "47-56",
+        "element_theme": "Wood/Metal"
+      },
+      {
+        "number": 6,
+        "stem": "Yi",
+        "branch": "You",
+        "animal": "Rooster",
+        "ages": "57-66",
+        "element_theme": "Wood/Metal"
+      },
+      {
+        "number": 7,
+        "stem": "Bing",
+        "branch": "Xu",
+        "animal": "Dog",
+        "ages": "67-76",
+        "element_theme": "Fire/Earth"
+      },
+      {
+        "number": 8,
+        "stem": "Ding",
+        "branch": "Hai",
+        "animal": "Pig",
+        "ages": "77-86",
+        "element_theme": "Fire/Water"
+      }
+    ],
+    "current_luck_pillar": {
+      "number": 3,
+      "description": "LP3: Ren Wu (Horse) ages 27-36",
+      "themes": ""
+    },
+    "key_themes": []
+  }
+}

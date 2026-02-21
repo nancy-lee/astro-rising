@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(*python3 *compute/*)",
+      "Bash(*python3 -c *)",
+      "Bash(./setup.sh)",
+      "Read(*)",
+      "Write(chart_data/*)",
+      "Write(compute/*)"
+    ]
+  }
+}
