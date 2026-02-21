@@ -300,6 +300,41 @@ def current_transits(date: datetime) -> dict:
     return planetary_positions(date, "12:00")
 
 
+def batch_transits(dates: list) -> dict:
+    """
+    Compute transit positions for multiple dates in a single pass.
+    More efficient than calling current_transits() in a loop.
+
+    Args:
+        dates: list of datetime objects
+
+    Returns:
+        Dict keyed by YYYY-MM-DD string, values are planetary position dicts.
+    """
+    results = {}
+    for date in dates:
+        jd = _to_julian(date, "12:00")
+        positions = {}
+        for name, planet_id in PLANETS.items():
+            try:
+                result, _ = swe.calc_ut(jd, planet_id, swe.FLG_SWIEPH)
+            except swe.Error as e:
+                positions[name] = {
+                    "sign": None, "degree": None, "minutes": None,
+                    "longitude": None, "speed": None, "retrograde": None,
+                    "error": str(e),
+                }
+                continue
+            longitude = result[0]
+            speed = result[3]
+            pos = _longitude_to_sign(longitude)
+            pos["speed"] = round(speed, 4)
+            pos["retrograde"] = speed < 0
+            positions[name] = pos
+        results[date.strftime("%Y-%m-%d")] = positions
+    return results
+
+
 # ============================================================
 # TEST / VERIFICATION
 # ============================================================

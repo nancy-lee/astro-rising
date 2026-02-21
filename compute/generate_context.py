@@ -23,7 +23,7 @@ from compute.bazi import (
     compute_chart, annual_pillar, annual_interactions,
     STEM_BY_PINYIN, BRANCH_BY_PINYIN, ten_god
 )
-from compute.western import planetary_positions, current_transits, find_aspects
+from compute.western import planetary_positions, current_transits, find_aspects, batch_transits
 
 
 def load_user_chart(user_name: str) -> dict:
@@ -119,15 +119,11 @@ def generate_reading_context(user_name: str, target_date: str,
     # BaZi context
     bazi_context = compute_bazi_context(user_chart, date)
     
-    # Western transit context — compute actual positions via ephemeris
-    transit_positions = current_transits(date)
-
     # Build natal positions dict from chart data for aspect comparison
     natal_positions = {}
     for planet_name, planet_data in user_chart["western"]["planets"].items():
         if planet_data.get("degree") is None:
             continue
-        # Convert chart format (sign + degree) to ecliptic longitude
         sign = planet_data["sign"]
         degree = planet_data["degree"]
         sign_index = [
@@ -135,35 +131,24 @@ def generate_reading_context(user_name: str, target_date: str,
             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
         ].index(sign)
         longitude = sign_index * 30 + degree
-        # Normalize planet name to match transit keys
         display_name = planet_name.replace("_", " ").title()
         natal_positions[f"natal {display_name}"] = {
             "longitude": longitude,
             "sign": sign,
             "degree": int(degree),
             "minutes": int((degree - int(degree)) * 60),
-            "speed": 0,  # natal positions don't move
+            "speed": 0,
         }
 
-    # Transit-to-natal aspects
-    transit_to_natal = find_aspects(transit_positions, natal_positions)
-
-    # Transit-to-transit aspects (what's happening in the sky)
-    transit_to_transit = find_aspects(transit_positions, transit_positions, skip_same=True)
-
-    western_context = {
-        "transit_positions": transit_positions,
-        "transit_to_natal_aspects": transit_to_natal,
-        "transit_to_transit_aspects": transit_to_transit[:15],  # top 15 by orb tightness
-    }
-
-    # For weekly readings, also compute transits for each day
+    # Western transit context — batch all dates in one pass
     if reading_type == "weekly":
+        week_dates = [date + timedelta(days=i) for i in range(7)]
+        all_positions = batch_transits(week_dates)
+        transit_positions = all_positions[date.strftime("%Y-%m-%d")]
         daily_transits = {}
-        for i in range(7):
-            day_date = date + timedelta(days=i)
+        for day_date in week_dates:
             day_key = day_date.strftime("%Y-%m-%d")
-            day_positions = current_transits(day_date)
+            day_positions = all_positions[day_key]
             day_aspects = find_aspects(day_positions, natal_positions)
             daily_transits[day_key] = {
                 "positions": {name: {"sign": p["sign"], "degree": p["degree"],
@@ -171,6 +156,20 @@ def generate_reading_context(user_name: str, target_date: str,
                               for name, p in day_positions.items() if p.get("sign")},
                 "aspects_to_natal": day_aspects[:20],
             }
+    else:
+        transit_positions = current_transits(date)
+        daily_transits = None
+
+    # Transit-to-natal and transit-to-transit aspects
+    transit_to_natal = find_aspects(transit_positions, natal_positions)
+    transit_to_transit = find_aspects(transit_positions, transit_positions, skip_same=True)
+
+    western_context = {
+        "transit_positions": transit_positions,
+        "transit_to_natal_aspects": transit_to_natal,
+        "transit_to_transit_aspects": transit_to_transit[:15],
+    }
+    if daily_transits is not None:
         western_context["daily_transits"] = daily_transits
 
     # Assemble full context

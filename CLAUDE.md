@@ -40,6 +40,20 @@ When the user asks for a reading:
 
 3. **Present the reading** to the user.
 
+4. **Open the chart** in the browser: `open chart_data/<name>_chart.html`. This refreshes the readings log the agent just updated. The browser focuses an already-open tab rather than spawning a new one.
+
+## Life Notes
+
+When the user shares a personal circumstance mid-conversation (not a reading request) — a job change, relationship event, health update, move, major transition — save it as a note:
+
+1. Acknowledge naturally, one or two sentences.
+2. Mention it's been noted for future readings.
+3. Read `chart_data/<name>_notes.json` (or start with `{"last_updated": "<now>", "notes": []}` if it doesn't exist), append `{"id": "note-<YYYYMMDD>-<NNN>", "added": "<YYYY-MM-DD>", "context": "<what they shared>", "category": "<work|relationship|health|home|other>"}`, write back.
+
+When the user says something has resolved, remove the matching note and confirm.
+
+The reading agent reads these files directly — no need to relay them in the Task call.
+
 ## Agents
 
 Agent instructions live in `.claude/agents/`. They are invoked via the Task tool as subagents — the computation happens in the background, not in the main conversation.

@@ -22,18 +22,67 @@ You'll receive:
 
 This writes to `chart_data/<name>_context.json`.
 
-2. **Read the context file** at `chart_data/<name>_context.json` — transit positions, aspects, BaZi annual context, calendar data.
+2. **Read the context file** at `chart_data/<name>_context.json` — this contains everything: transit positions, aspects, BaZi annual context, calendar data, and the full natal chart (`western.natal`, `bazi.natal`).
 
-3. **Read the user's natal chart** from `chart_data/<name>.json` for key themes, notable features, luck pillar descriptions.
+2b. **Load personalization data.**
 
-4. **Verify pre-flight.** Confirm you have:
+Check for `chart_data/<name>_notes.json`. If it exists, read it. These are personal circumstances the user has shared — current job, relationships, health, life transitions. Hold them as background context. Do not announce or list them in the reading. Let them shape which transits feel most relevant and how you frame them. If a transit directly echoes a noted life circumstance, connect them explicitly.
+
+Check for `chart_data/<name>_readings.json`. If it exists, read the 3 most recent entries (by date). Extract only `date`, `type`, `themes`, and `summary` from each — **do not read or use `full_text`**, it exists for the user's reference only and must not be loaded into your context. Use the condensed data to:
+- Avoid repeating last reading's exact framing if the same transits are still active
+- Name visible patterns across time when they exist ("This is the third week Saturn has been bearing down on…")
+- Track whether a theme is building, peaking, or releasing
+
+3. **Verify pre-flight.** Confirm you have:
    - Today's date and day of week (from context JSON calendar section)
    - Full week layout (for weekly readings)
    - Current transit positions (from context JSON)
    - BaZi annual context (from context JSON)
    - Natal chart data (from context JSON + chart file)
 
+4. **Before you write — identify the cross-system themes.**
+
+Do not start writing until you have done this:
+
+1. List the 3 strongest Western signals for this period: the tightest transit-to-natal aspects, any station/ingress events, anything involving the angles or chart rulers.
+2. List the 3 strongest BaZi signals: active branch interactions (clashes first), the annual Ten God relationship to the Day Master, the current Luck Pillar phase.
+3. Look for **convergence and tension** across the two lists:
+   - **Convergence**: Both systems pointing at the same life domain (e.g., Saturn on the 7th house cusp + Day Pillar clash = relationship pressure from two angles). When this happens, the combined signal is the lead.
+   - **Tension**: One system says expansion, the other says contraction. Name this directly — it's where the most useful insight lives.
+   - **Silence**: If one system has nothing significant to say about a domain, let the other carry it. Don't force a BaZi angle onto a purely Western transit.
+
+4. Organize the reading around the 2–3 themes you found, **not around the systems**. Each theme is a paragraph or section. BaZi and Western evidence for that theme live in the same paragraph, not separate ones.
+
+**Anti-patterns to avoid:**
+- Section headers named "Western" or "BaZi"
+- Any version of "from a BaZi perspective" as a transition
+- BaZi content appearing only in the final third of the reading
+- Summarizing one system completely before mentioning the other
+
 5. **Write the reading** following the methodology below.
+
+6. **Save the reading.**
+
+   a. Read `chart_data/<name>_readings.json`, or start with `[]` if it doesn't exist.
+
+   b. Build a new entry:
+      - `id`: `<date>-<type>` (append `-2` if duplicate)
+      - `date`, `type`, `generated_at` (ISO timestamp)
+      - `themes`: 3–5 keyword phrases extracted from what you wrote (the named transits, BaZi interactions, thematic words)
+      - `summary`: 1–2 sentences capturing the core arc of the reading period
+      - `full_text`: complete reading text
+
+   c. Append. If array exceeds 26 entries, trim oldest until it has 26.
+
+   d. Write back to `chart_data/<name>_readings.json`.
+
+7. **Update the HTML chart.** Run:
+
+```
+.venv/bin/python3 compute/update_html_readings.py --user <name>
+```
+
+This patches `chart_data/<name>_chart.html` with a styled readings log (newest first, full text in collapsible `<details>` elements).
 
 ## Reading Methodology
 
@@ -72,7 +121,7 @@ When both systems point to the same theme, say so. When they create tension, nam
 
 **Constitutional coloring.** The Day Master element shades how Western placements are lived. A water Day Master with a Scorpio Moon processes through depth and strategic withdrawal; a fire Day Master with the same Moon processes through intensity and confrontation. When Day Master and Sun sign genuinely conflict, name the tension directly.
 
-Don't force bridges where none exist. Some transits are purely Western, some periods purely BaZi. Let each system carry the sections where it has more to say.
+If a transit is purely Western with no BaZi resonance, write it as Western. If a pillar interaction is purely BaZi with no Western echo, write it as BaZi. The goal is not equal time for both systems — it's honest synthesis. Let each system carry the sections where it has more to say, but check for cross-system resonance before you conclude a theme is one-system-only.
 
 ### BaZi Interpretation
 

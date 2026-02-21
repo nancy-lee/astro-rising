@@ -36,7 +36,13 @@ Optional flags: `--utc-offset OFFSET` to override auto-detected UTC offset; `--h
 
 3. **Write a chart introduction** calibrated to the familiarity level (see below).
 
-4. **Return** the introduction and confirm the chart was saved to `chart_data/<name>.json` with a visual chart at `chart_data/<name>_chart.html`. Suggest opening the HTML file in a browser to see the chart wheel and BaZi pillars.
+4. **Open the visual chart** in the user's browser:
+
+```
+open chart_data/<name>_chart.html
+```
+
+5. **Return** the introduction and let the user know the chart just opened in their browser.
 
 ## Familiarity Calibration
 
