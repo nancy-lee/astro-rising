@@ -11,7 +11,7 @@ cd astro-rising
 claude
 ```
 
-That's it. On first session, Claude asks about your familiarity with astrology, then asks for your birth details (name, date, time, place — all at once). It computes your full natal chart in the background and introduces you to your chart at whatever depth matches your experience level. Then ask for a reading whenever you're ready.
+That's it. On first session, Claude asks about your familiarity with astrology, then asks for your birth details (name, date, time, place). It computes your full natal chart in the background and introduces you to your chart at whatever depth matches your experience level. Then ask for a reading whenever you're ready.
 
 ### Requirements
 
