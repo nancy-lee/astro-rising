@@ -37,6 +37,8 @@ source .venv/bin/activate
 # Install dependencies
 echo ""
 echo "Installing dependencies..."
+# pyswisseph builds C++ from source — macOS needs the SDK include path
+export CPLUS_INCLUDE_PATH="$(xcrun --show-sdk-path)/usr/include/c++/v1"
 pip install -q --disable-pip-version-check -r requirements.txt
 echo "  Done."
 
